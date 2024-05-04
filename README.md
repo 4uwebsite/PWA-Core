@@ -29,12 +29,11 @@ Service Workers must be in the root folder to have full access scope.
 - Best place would be above the index.html page header.
 - Some browsers may not support Service Workers. Check to validate the browsers support.
 - Below code should be in main.js:
-
-'if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
-    navigator.serviceWorker.register('./sw.js') // This is an async function.
-        // .then(() => console.log('Service Worker registered.')) // Production code.
-        .then(reg => console.log('Service Worker registered.', reg)) // Debugging code.
-        // .catch(() => console.log('Service Worker not registered.')) // Production code.
-        .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
-}'
+    if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
+        navigator.serviceWorker.register('./sw.js') // This is an async function.
+            // .then(() => console.log('Service Worker registered.')) // Production code.
+            .then(reg => console.log('Service Worker registered.', reg)) // Debugging code.
+            // .catch(() => console.log('Service Worker not registered.')) // Production code.
+            .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
+    }
 ### Installing the Service Worker
