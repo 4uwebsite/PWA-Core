@@ -8,6 +8,7 @@
 4. Implement Service Worker.
     - Register event
     - Install event
+    - Activate event
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -37,3 +38,19 @@ Service Workers must be in the root folder to have full access scope.
             .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
     }
 ### Installing the Service Worker
+- When a change to the Service Worker is made it gets installed again. 
+- But the current version of the Service Worker keeps running and the updated Service Worker - is in waiting to acctive. 
+- It only gets activated once all tabs (instances of the app) are closed. 
+- This is also a good place to cache shell assets. 
+- Code: in sw.js
+// Install Service Worker.
+self.addEventListener('install', evt => {
+    console.log('Service Worker installed.')
+})
+### Activate Event (when Service Worker gets activated)
+- This is a good place to do caching as well.
+- Code: in sw.js
+// Service Worker activated.
+self.addEventListener('activate', evt => {
+    console.log('Service Worker activated.')
+})
