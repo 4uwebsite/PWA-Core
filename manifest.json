@@ -2,12 +2,20 @@
   "name": "PWA Core Example",
   "short_name": "PWAcore",
   "description": "Understanding how PWAs work and creating a core strucre that can be reused.",
+  "id": "./index.html",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FF7300",
   "theme_color": "#FF7300",
   "orientation": "portrait-primary",
   "screenshots": [
+    {
+      "src": "./assets/screenshot1.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
     {
       "src": "./assets/screenshot2.png",
       "type": "image/jpg",
@@ -37,6 +45,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Go to PWA About",
+      "short_name": "PWA About",
+      "description": "Go to the about page of the PWA app.",
+      "url": "./about.html",
+      "icons": [{ "src": "./assets/app-images/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Go to PWA Contact",
+      "short_name": "PWA Contact",
+      "description": "Go to the contact page of the PWA app.",
+      "url": "./contact.html",
+      "icons": [{ "src": "./assets/app-images/android-chrome-192x192.png", "sizes": "192x192" }]
     }
   ],
   "related_applications": [

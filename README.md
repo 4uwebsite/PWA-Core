@@ -3,6 +3,7 @@
 
 # Phases
 1. Create manifest.json.  
+2. Link manifest.json to each .html page.
 
 ## manifest.json
 - Should be included in each .html. 
