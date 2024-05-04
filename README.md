@@ -1,6 +1,9 @@
 # PWA-Core
  A sample app to understand the core structure of PWAs.
 
+# Shell vs Dynamic Assets
+ Model your app in a way where the SHELL (assential) assets are cached (including fallbacks) so that the app works offline. DYNAMIC assets can be cached too.
+
 # Phases
 1. Create manifest.json.  
 2. Link manifest.json to each .html page.
@@ -9,6 +12,7 @@
     - Register event
     - Install event
     - Activate event
+    - Fetch events
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -54,3 +58,4 @@ self.addEventListener('install', evt => {
 self.addEventListener('activate', evt => {
     console.log('Service Worker activated.')
 })
+### Fetch Events
