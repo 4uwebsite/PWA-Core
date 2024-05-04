@@ -6,7 +6,8 @@
 2. Link manifest.json to each .html page.
 3. Add iOS support link and meta elemts to each .html page.
 4. Implement Service Worker.
-    - Register
+    - Register event
+    - Install event
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -22,18 +23,17 @@ The following code should be in each .html page header:
 
 ## Implement Service Worker
 Service Workers must be in the root folder to have full access scope.
-### Registering the Service Worker.
+### Registering the Service Worker
 - Service Workers must be registered from another .js file. 
 - Ideally use the main.js as it needs to be registered as early as possible. 
 - Best place would be above the index.html page header.
 - Some browsers may not support Service Workers. Check to validate the browsers support.
 - Below code should be in main.js:
-if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
+'if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
     navigator.serviceWorker.register('./sw.js') // This is an async function.
         // .then(() => console.log('Service Worker registered.')) // Production code.
         .then(reg => console.log('Service Worker registered.', reg)) // Debugging code.
         // .catch(() => console.log('Service Worker not registered.')) // Production code.
         .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
-}
-
-
+}'
+### Installing the Service Worker
