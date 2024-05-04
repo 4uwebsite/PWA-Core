@@ -1,0 +1,55 @@
+{
+  "name": "PWA Core Example",
+  "short_name": "PWAcore",
+  "description": "Understanding how PWAs work and creating a core strucre that can be reused.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FF7300",
+  "theme_color": "#FF7300",
+  "orientation": "portrait-primary",
+  "screenshots": [
+    {
+      "src": "./assets/screenshot2.png",
+      "type": "image/jpg",
+      "sizes": "720x540",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "./assets/app-images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/app-images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/app-images/android-chrome-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./assets/app-images/android-chrome-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.app1",
+      "id": "com.example.app1"
+    }, {
+      "platform": "itunes",
+      "url": "https://itunes.apple.com/app/example-app1/id123456789"
+    }, {
+      "platform": "windows",
+      "url": "https://apps.microsoft.com/store/detail/example-app1/id123456789"
+    }
+  ]
+}
