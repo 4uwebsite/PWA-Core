@@ -1,6 +1,9 @@
 # PWA-Core
  A sample app to understand the core structure of PWAs.
 
+# ONLY FOR ASSETS. NOT FOR DBs.
+Lookup project XXX for DB caching.
+
 # Shell vs Dynamic Assets
  Model your app in a way where the SHELL (assential) assets are cached (including fallbacks) so that the app works offline. DYNAMIC assets can be cached too; ideally when they are requested.
  ## Shell Assets (Pre-Caching)
@@ -19,6 +22,7 @@
     - Cache versioning
     - Dynamic caching
     - Offline Fallback
+    - Conditional Fallbacks
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -90,3 +94,7 @@ const dynamicAssetsCacheName = 'dynamicAssets-1'
 (BlockRef: sw.js-fetchEvent)
 - Create a page to serve when requested resource is unavailable.
 - Trigger the fallback in the fetch event.
+### Conditional Fallbacks
+(BlockRef: ConditionalFallBack)
+- Check and retun relavent fallback based on resource request type.
+

@@ -1,8 +1,8 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-12'
-const dynamicAssetsCacheName = 'dynamicAssets-4'
+const shellAssetsCacheName = 'shellAssets-14'
+const dynamicAssetsCacheName = 'dynamicAssets-6'
 
 const shellAssetRequests = [
     '/',
@@ -21,7 +21,9 @@ const shellAssetRequests = [
     'assets/app-images/android-chrome-maskable-192x192.png',
     'assets/app-images/android-chrome-maskable-512x512.png',
     'assets/app-images/apple-touch-icon.png',
-    'fallback.html'
+    'fallback.html',
+    'condiotnalfallbackimg.html',
+    'assets/fallback.png'
 ]
 // NOTE: When caching Google fonts you might have to add the link that Google fonts provided and the link that it actually requests when running. Refer above shellAssetRequests.
 
@@ -79,6 +81,15 @@ self.addEventListener('fetch', evt => {
                     return fetchRes // Returning the response to the user after caching in dynamic.
                 })
             })
-        }).catch(() => caches.match('fallback.html')) // Returns the fallback page when the requested resource is unavilable. 
+        }).catch(() => {
+            // BlockRef: ConditionalFallBack
+            // Returns the fallback resource when the requested resource is unavilable. 
+            if (evt.request.url.indexOf('.html') > -1){
+                return caches.match('fallback.html') // for pages
+            }
+            else if (evt.request.url.indexOf('.jpeg') > -1 || evt.request.url.indexOf('.png')){
+                return caches.match('./assets/fallback.png') // for images
+            }
+        }) 
     )
 })
