@@ -1,8 +1,8 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-10'
-const dynamicAssetsCacheName = 'dynamicAssets-2'
+const shellAssetsCacheName = 'shellAssets-11'
+const dynamicAssetsCacheName = 'dynamicAssets-3'
 
 const shellAssetRequests = [
     '/',
