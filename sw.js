@@ -1,7 +1,7 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-7'
+const shellAssetsCacheName = 'shellAssets-9'
 const dynamicAssetsCacheName = 'dynamicAssets-2'
 
 const shellAssetRequests = [
@@ -20,7 +20,8 @@ const shellAssetRequests = [
     'assets/app-images/android-chrome-512x512.png',
     'assets/app-images/android-chrome-maskable-192x192.png',
     'assets/app-images/android-chrome-maskable-512x512.png',
-    'assets/app-images/apple-touch-icon.png'
+    'assets/app-images/apple-touch-icon.png',
+    'fallback.html'
 ]
 // NOTE: When caching Google fonts you might have to add the link that Google fonts provided and the link that it actually requests when running. Refer above shellAssetRequests.
 
@@ -43,6 +44,7 @@ self.addEventListener('install', evt => {
 
 // BlockRef: sw.js-activateEvent
 // Service Worker activated.
+// Cache Versioning
 self.addEventListener('activate', evt => {
     console.log('Service Worker activated.')
     evt.waitUntil(
@@ -50,8 +52,8 @@ self.addEventListener('activate', evt => {
         caches.keys().then(keys => {
             console.log('Found Cache keys:', keys)
             return Promise.all(keys
-                // If the key doesn't match, then delete the key (that specific cache).
-                .filter(key => key !== shellAssetsCacheName) 
+                // If the key doesn't match both caches, then delete the key (that specific cache).
+                .filter(key => key !== shellAssetsCacheName && key !== dynamicAssetsCacheName) 
                 .map(key => caches.delete(key))
             )
         })
@@ -77,6 +79,6 @@ self.addEventListener('fetch', evt => {
                     return fetchRes // Returning the response to the user after caching in dynamic.
                 })
             })
-        })
+        }).catch(() => caches.match('fallback.html')) // Returns the fallback page when the requested resource is unavilable. 
     )
 })

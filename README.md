@@ -18,6 +18,7 @@
     - Fetch events
     - Cache versioning
     - Dynamic caching
+    - Offline Fallback
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -85,3 +86,7 @@ self.addEventListener('activate', evt => {
 - Cached as a seperate key. Usually named:
 const dynamicAssetsCacheName = 'dynamicAssets-1' 
 - Dynamic caching is also done in the 'fetch event'.
+### Offline Fallback
+(BlockRef: sw.js-fetchEvent)
+- Create a page to serve when requested resource is unavailable.
+- Trigger the fallback in the fetch event.
