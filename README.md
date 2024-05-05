@@ -16,6 +16,8 @@
         - Cache Shell Assets (Pre-Caching)
     - Activate event
     - Fetch events
+    - Cache versioning
+    - Dynamic caching
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -72,3 +74,9 @@ self.addEventListener('activate', evt => {
 - Instead of gooing to the server, look for the requested resource in the cache.
 - If the requested resource isn't in the cache, go to the remote server.
 - Known issues: need to properly understand how to cache Google Fonts.
+### Cache Versioning
+(BlockRef: sw.js-activateEvent)
+- Bacuse the fetch requests are being intercepted, even if the cache name was changed (new cache created) it will find the resource from the previous (old) cache. So we need to delete the older cache versions. 
+- Best place to do this is in the 'activate' event. Then when we make a change to the website, we just have to change the cacheName version and the Service Worker will be reactivated next time the page reloads. 
+### Dynamic Caching
+[NEXT]

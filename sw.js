@@ -1,7 +1,7 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-1'
+const shellAssetsCacheName = 'shellAssets-6'
 
 const shellAssetRequests = [
     '/',
@@ -40,13 +40,25 @@ self.addEventListener('install', evt => {
 })
 
 
+// BlockRef: sw.js-activateEvent
 // Service Worker activated.
 self.addEventListener('activate', evt => {
     console.log('Service Worker activated.')
+    evt.waitUntil(
+        // From the caches get keys into an array. When the async function is done loop through the array of keys.
+        caches.keys().then(keys => {
+            console.log('Found Cache keys:', keys)
+            return Promise.all(keys
+                // If the key doesn't match, then delete the key (that specific cache).
+                .filter(key => key !== shellAssetsCacheName) 
+                .map(key => caches.delete(key))
+            )
+        })
+    )
 })
 
 
-// BlockRef: sw.ja-fetchEvent
+// BlockRef: sw.js-fetchEvent
 // Fetch events.
 self.addEventListener('fetch', evt => {
     // console.log('Featch Events:', evt)
