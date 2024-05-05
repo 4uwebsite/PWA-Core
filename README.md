@@ -23,6 +23,7 @@ Lookup project XXX for DB caching.
     - Dynamic caching
     - Offline Fallback
     - Conditional Fallbacks
+    - Limiting Cache Size
 
 ## manifest.json
 Docs: https://web.dev/articles/add-manifest 
@@ -97,4 +98,7 @@ const dynamicAssetsCacheName = 'dynamicAssets-1'
 ### Conditional Fallbacks
 (BlockRef: ConditionalFallBack)
 - Check and retun relavent fallback based on resource request type.
-
+### Limiting Cache Size
+(BlockRef: sw.ja-limitCacheSize)
+- Limit the number of assets in the cache. Not the file size but the asset count.
+- This is handled by the limitCacheSize function. Which is called after the putting new dynamic asset in the cache. Newest asset is added and the oldest removed.
