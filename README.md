@@ -2,7 +2,9 @@
  A sample app to understand the core structure of PWAs.
 
 # Shell vs Dynamic Assets
- Model your app in a way where the SHELL (assential) assets are cached (including fallbacks) so that the app works offline. DYNAMIC assets can be cached too.
+ Model your app in a way where the SHELL (assential) assets are cached (including fallbacks) so that the app works offline. DYNAMIC assets can be cached too; ideally when they are requested.
+ ## Shell Assets (Pre-Caching)
+ Ideally, cache in the insall event in the Service Worker.
 
 # Phases
 1. Create manifest.json.  
@@ -11,6 +13,7 @@
 4. Implement Service Worker.
     - Register event
     - Install event
+        - Cache Shell Assets (Pre-Caching)
     - Activate event
     - Fetch events
 
@@ -34,13 +37,13 @@ Service Workers must be in the root folder to have full access scope.
 - Best place would be above the index.html page header.
 - Some browsers may not support Service Workers. Check to validate the browsers support.
 - Below code should be in main.js:
-    if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
-        navigator.serviceWorker.register('./sw.js') // This is an async function.
-            // .then(() => console.log('Service Worker registered.')) // Production code.
-            .then(reg => console.log('Service Worker registered.', reg)) // Debugging code.
-            // .catch(() => console.log('Service Worker not registered.')) // Production code.
-            .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
-    }
+if ('serviceWorker' in navigator){ // Checking if browser supports Service Workers.
+    navigator.serviceWorker.register('./sw.js') // This is an async function.
+        // .then(() => console.log('Service Worker registered.')) // Production code.
+        .then(reg => console.log('Service Worker registered.', reg)) // Debugging code.
+        // .catch(() => console.log('Service Worker not registered.')) // Production code.
+        .catch(err => console.log('Service Worker not registered.', err)) // Debugging code.
+}
 ### Installing the Service Worker
 - When a change to the Service Worker is made it gets installed again. 
 - But the current version of the Service Worker keeps running and the updated Service Worker - is in waiting to acctive. 
@@ -51,6 +54,11 @@ Service Workers must be in the root folder to have full access scope.
 self.addEventListener('install', evt => {
     console.log('Service Worker installed.')
 })
+#### Caching Shell Assets (Pre-Caching)
+(BlockRef: sw.js-installEvent)
+- Use a cache name constant 'shellAssets-1'.
+- The last digit is changed when cache versioning happens.
+- Nest the caching function inside evt.waitUntil() because the install event is async.
 ### Activate Event (when Service Worker gets activated)
 - This is a good place to do caching as well.
 - Code: in sw.js
