@@ -1,8 +1,8 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-18'
-const dynamicAssetsCacheName = 'dynamicAssets-10'
+const shellAssetsCacheName = 'shellAssets-19'
+const dynamicAssetsCacheName = 'dynamicAssets-11'
 
 const shellAssetRequests = [
     '/',
@@ -79,7 +79,7 @@ self.addEventListener('fetch', evt => {
                 return caches.open(dynamicAssetsCacheName).then(cache => {
                     cache.put(evt.request.url, fetchRes.clone()) // Need to clone fetchRes here so it can be used below.
                     // Calling this function to limit the number of assets in the dynamic cache. Count starts from 0 because it's an array. In production use a variable for the size so it can be changed easily from top of this JS file.
-                    limitCacheSize(dynamicAssetsCacheName, 0) 
+                    limitCacheSize(dynamicAssetsCacheName, 1) 
                     return fetchRes // Returning the response to the user after caching in dynamic.
                 })
             })
