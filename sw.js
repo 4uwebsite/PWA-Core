@@ -1,7 +1,8 @@
 // Service Worker registered in main.js.
 
 
-const shellAssetsCacheName = 'shellAssets-6'
+const shellAssetsCacheName = 'shellAssets-7'
+const dynamicAssetsCacheName = 'dynamicAssets-2'
 
 const shellAssetRequests = [
     '/',
@@ -60,6 +61,7 @@ self.addEventListener('activate', evt => {
 
 // BlockRef: sw.js-fetchEvent
 // Fetch events.
+// shell & dynamic assets are cached here.
 self.addEventListener('fetch', evt => {
     // console.log('Featch Events:', evt)
     // Pauses the fetch event and responds with our own custom event.
@@ -68,7 +70,13 @@ self.addEventListener('fetch', evt => {
         caches.match(evt.request).then(cacheRes => {
             // If a match was found cacheRes will reference it. Return that.
             // If no match, return original request to the remote server.
-            return cacheRes || fetch(evt.request)
+            return cacheRes || fetch(evt.request).then(fetchRes => {
+                // If a fetch request goes to the remote server, cache it in dynamic.
+                return caches.open(dynamicAssetsCacheName).then(cache => {
+                    cache.put(evt.request.url, fetchRes.clone()) // Need to clone fetchRes here so it can be used below.
+                    return fetchRes // Returning the response to the user after caching in dynamic.
+                })
+            })
         })
     )
 })

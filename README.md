@@ -79,4 +79,9 @@ self.addEventListener('activate', evt => {
 - Bacuse the fetch requests are being intercepted, even if the cache name was changed (new cache created) it will find the resource from the previous (old) cache. So we need to delete the older cache versions. 
 - Best place to do this is in the 'activate' event. Then when we make a change to the website, we just have to change the cacheName version and the Service Worker will be reactivated next time the page reloads. 
 ### Dynamic Caching
-[NEXT]
+(BlockRef: sw.js-fetchEvent)
+- Ideally you don't want to cache your entire site, unless it is very light. 
+- With Dynamic Caching uncached resoures are cached when the user access them while online.
+- Cached as a seperate key. Usually named:
+const dynamicAssetsCacheName = 'dynamicAssets-1' 
+- Dynamic caching is also done in the 'fetch event'.
