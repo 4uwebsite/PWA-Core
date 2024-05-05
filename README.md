@@ -67,3 +67,8 @@ self.addEventListener('activate', evt => {
     console.log('Service Worker activated.')
 })
 ### Fetch Events
+(BlockRef: sw.ja-fetchEvent)
+- Intercecpt the fetch requests and respond with our own custom event.
+- Instead of gooing to the server, look for the requested resource in the cache.
+- If the requested resource isn't in the cache, go to the remote server.
+- Known issues: need to properly understand how to cache Google Fonts.
